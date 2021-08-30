@@ -28,22 +28,14 @@ const defineCartItems = function () {
       return;
     } else {
       const item = getItemData(itemId);
-
-      for (let product of VALUE) {
-        if (product.name === item.name) {
-          product.increaseAmount();
-          console.log(999);
-        } else {
-          VALUE.push(item);
-        }
-        addItemsToCart();
-      }
+      VALUE.push(item);
+      addItemsToCart();
     }
   });
 };
 
 const getItemData = function (itemId) {
-  return menu.reduce((acc, el, idx, arr) => {
+  let obj = menu.reduce((acc, el, idx, arr) => {
     if (el.id === itemId) {
       acc.name = el.name;
       acc.price = el.price;
@@ -54,14 +46,32 @@ const getItemData = function (itemId) {
       acc.deccreaseAmount = function () {
         this.amount -= 1;
       };
+      acc.isItem = function () {
+        let passed = VALUE.find(el => el.name === obj.name);
+        passed ? VALUE[VALUE.indexOf(passed)].increaseAmount() : VALUE.push(this);
+      };
     }
     return acc;
   }, {});
+
+  // obj.isItem();
+  return obj;
 };
 
 const addItemsToCart = function () {
   localStorage.setItem(PROPERTY, JSON.stringify(VALUE));
-  console.log(localStorage.getItem(PROPERTY));
 };
 
 defineCartItems();
+
+console.log(localStorage.items);
+
+const getCartItems = JSON.parse(localStorage.getItem(PROPERTY));
+console.log(
+  getCartItems.reduce((acc, el, idx, arr) => {
+    console.log(el.name);
+    if (acc.el.name) {
+      console.log(idx);
+    }
+  }, []),
+);
