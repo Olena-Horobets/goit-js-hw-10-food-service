@@ -1,0 +1,13 @@
+{{#each this}}
+  <li class='cart__item'>
+    <h3 class='cart__name'>{{name}}</h3>
+
+    <span class='cart__text'>Цена: </span>
+    <span class='cart__text'>{{price}}</span>
+    <span class='cart__text'> кредитов</span>
+
+    <button class='cart__button' type='button' data-action='decrease'>-</button>
+    <span class='cart__text'>{{amount}}</span>
+    <button class='cart__button' type='button' data-action='increase'>+</button>
+  </li>
+{{/each}}
