@@ -2,6 +2,7 @@ import { refs } from './refs';
 import menu from '../db/menu.json';
 
 import { Cart } from './refs';
+import { getCartItemsQuantity } from './generate-cart-list';
 
 const { PROPERTY, VALUE } = Cart;
 
@@ -18,7 +19,7 @@ const getItemData = function (itemId, num = 1) {
   }
 };
 
-export const addItemsToCart = function () {
+const addItemsToCart = function () {
   localStorage.setItem(PROPERTY, JSON.stringify(VALUE));
 };
 
@@ -29,8 +30,8 @@ refs.cardsList.addEventListener('click', e => {
     return;
   } else {
     getItemData(itemId);
-    // console.log(itemId);
-    // console.log(VALUE);
+
     addItemsToCart();
+    getCartItemsQuantity();
   }
 });

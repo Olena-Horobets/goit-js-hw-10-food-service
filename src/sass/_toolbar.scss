@@ -81,19 +81,6 @@
   box-shadow: 0 0 0 3px #2196f3;
 }
 
-button[data-action='show-cart']::before {
-  content: '';
-  width: 16px;
-  height: 16px;
-  display: block;
-  position: absolute;
-  right: -2px;
-  top: 2px;
-
-  border-radius: 50%;
-  background-color: red;
-}
-
 button[data-action='show-cart'] {
   position: relative;
   border: none;
@@ -101,10 +88,30 @@ button[data-action='show-cart'] {
   height: 50px;
   padding: 0;
   background: none;
-
-  transition: color 250ms var(--timing-function);
+  color: currentColor;
 }
 
 button[data-action='show-cart']:hover {
   color: #2196f3;
+  transition: color 250ms var(--timing-function);
+}
+
+.cart-amount {
+  width: 18px;
+  height: 18px;
+  display: block;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: -2px;
+  top: 2px;
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+
+  border-radius: 50%;
+  background-color: red;
 }

@@ -6,6 +6,7 @@ export const refs = {
   showCartBtn: document.querySelector('[data-action="show-cart"]'),
   cartList: document.querySelector('.cart-list'),
   closeCartBtn: document.querySelector('.cart-list__close'),
+  itemsQuant: document.querySelector('.cart-amount'),
 };
 
 export const Cart = {

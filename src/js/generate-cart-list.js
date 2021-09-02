@@ -4,8 +4,6 @@ import { Cart } from './refs';
 import cartListTpl from '../templates/cart-list.hbs';
 import emptyCart from '../templates/empty-cart.hbs';
 
-import { addItemsToCart } from './save-items-to-storage';
-
 let { PROPERTY, VALUE } = Cart;
 
 const getCartItemsFromLocalStorage = function () {
@@ -31,8 +29,6 @@ const getCartItemsFromLocalStorage = function () {
 // -------------------------
 
 refs.showCartBtn.addEventListener('click', e => {
-  console.log(777777777);
-
   let list = '';
   if (localStorage[PROPERTY]) {
     list = cartListTpl(getCartItemsFromLocalStorage());
@@ -43,9 +39,6 @@ refs.showCartBtn.addEventListener('click', e => {
   refs.cartList.closest('div').classList.remove('is-hidden');
 
   if (localStorage[PROPERTY]) {
-    // const decreaseBtn = document.querySelectorAll('.cart__button[data-action="decrease"]');
-    // const increaseBtn = document.querySelectorAll('.cart__button[data-action="increase"]');
-
     refs.cartList.addEventListener('click', onCartItemClick);
   }
 
@@ -75,7 +68,8 @@ let onCartItemClick = function (e) {
 
   VALUE[itemId].amount = newAmount;
   localStorage.setItem(PROPERTY, JSON.stringify(VALUE));
-  amountValue.textContent = newAmount;
+  amountValue.textContent = `${newAmount} шт.`;
+  getCartItemsQuantity();
 };
 
 export const decreaseAmount = function (VALUE, id) {
@@ -88,3 +82,20 @@ export const decreaseAmount = function (VALUE, id) {
 export const increaseAmount = function (VALUE, id) {
   return (VALUE[id].amount += 1);
 };
+
+// ------------------
+export const getCartItemsQuantity = function () {
+  if (localStorage[PROPERTY]) {
+    refs.itemsQuant.classList.remove('is-hidden');
+    VALUE = JSON.parse(localStorage[PROPERTY]);
+
+    let quantity = Object.values(VALUE).reduce((acc, el) => (acc += el.amount), 0);
+
+    refs.itemsQuant.textContent = quantity;
+    if (quantity === 0) {
+      refs.itemsQuant.classList.add('is-hidden');
+    }
+  }
+};
+
+getCartItemsQuantity();
