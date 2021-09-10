@@ -2,9 +2,11 @@
   <li class='cart__item' data-id={{id}}>
     <h3 class='cart__name'>{{name}}</h3>
 
-    <span class='cart__text'>Цена: </span>
-    <span class='cart__text'>{{price}}</span>
-    <span class='cart__text'> кредитов</span>
+    <p class='cart__text-line'>
+      <span class='cart__text'>Цена: </span>
+      <span class='cart__text'>{{price}}</span>
+      <span class='cart__text'> кредитов</span>
+    </p>
 
     <button class='cart__button' type='button' data-action='decrease'>-</button>
     <span class='cart__text amount' data-value={{id}}>{{amount}} шт.</span>
